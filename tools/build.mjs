@@ -3,7 +3,7 @@
 // Page filenames stay the old ones (e.g. "CWE-89 - SQL Injection.html") so every existing link keeps working.
 import { readFileSync, writeFileSync } from 'node:fs';
 
-const V = '20261117';
+const V = '202611172';
 const { meta, notes } = JSON.parse(readFileSync('content/notes.json', 'utf8'));
 const esc = (s) => String(s).replace(/&(?!(amp|lt|gt|quot|#\d+);)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const strip = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
@@ -63,7 +63,7 @@ const index = head('SyberVault · security notes by dvphnc', `SyberVault: ${note
     <div class="boot" aria-label="Vault unlocked">
       <p class="ln" data-type="cmd"><span class="ps">$ </span>./sybervault --unlock</p>
       <p class="ln c" data-type="out">verifying key ......... <span class="ok">ok</span></p>
-      <p class="ln c" data-type="out"><span class="ok">[ok]</span> access granted · ${notes.length} entries · read-only</p>
+      <p class="ln c" data-type="out"><span class="ok">[ok]</span> access granted · <span class="nw">${notes.length} entries</span> · <span class="nw">read-only</span></p>
     </div>
 
     <h1 class="vault-title">sybervault</h1>

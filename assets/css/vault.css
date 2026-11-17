@@ -120,8 +120,8 @@ h1.note-title::before { content: '# '; color: var(--faint); text-shadow: none; }
 .toc[open] summary::before { content: '▾ '; }
 .toc ol { list-style: none; margin-top: .4rem; counter-reset: s; }
 .toc li { counter-increment: s; }
-.toc a { display: block; padding: .15rem 0; color: var(--fg); text-decoration: none; }
-.toc a::before { content: counter(s, decimal-leading-zero) '  '; color: var(--faint); }
+.toc a { display: block; padding: .3rem 0 .3rem 4ch; text-indent: -4ch; color: var(--fg); text-decoration: none; } /* long names wrap under the name, not the number */
+.toc a::before { content: counter(s, decimal-leading-zero) '  '; color: var(--faint); white-space: pre; }
 .toc a:hover { color: var(--hi); }
 
 /* prose */
@@ -143,7 +143,7 @@ h1.note-title::before { content: '# '; color: var(--faint); text-shadow: none; }
 .prose code { color: var(--hi); background: var(--panel-2); border: 1px solid var(--line); padding: .05em .35em; font-size: .92em; }
 .prose pre { position: relative; background: var(--panel); border: 1px solid var(--line); padding: 1rem 1.1rem; overflow-x: auto; font-size: 13px; line-height: 1.65; }
 .prose pre code { background: none; border: 0; padding: 0; color: var(--fg); font-size: inherit; }
-.copy { position: absolute; top: .4rem; right: .45rem; background: var(--bg); color: var(--dim); border: 1px solid var(--line); font: 11px var(--mono); padding: .1rem .45rem; cursor: pointer; }
+.copy { position: absolute; top: .35rem; right: .4rem; background: var(--bg); color: var(--dim); border: 1px solid var(--line); font: 11px var(--mono); padding: .3rem .55rem; min-height: 28px; cursor: pointer; }
 .copy:hover { color: var(--hi); border-color: var(--line-2); }
 .prose table { width: 100%; border-collapse: collapse; font-size: 13px; display: block; overflow-x: auto; }
 .prose th, .prose td { border: 1px solid var(--line); padding: .45rem .7rem; text-align: left; vertical-align: top; }
@@ -199,6 +199,12 @@ h1.note-title::before { content: '# '; color: var(--faint); text-shadow: none; }
   .pager { grid-template-columns: 1fr; }
   .pager .next { grid-column: 1; }
 }
+
+/* comfortable tap targets: small links get taller hit areas without changing how they look */
+.brand, .bar-link, .path a, .foot a, .prompt-end a { display: inline-block; padding-block: .45rem; }
+.bar { padding-block: .25rem; }
+.toc summary { padding-block: .3rem; }
+.nw { white-space: nowrap; }
 
 @media (prefers-reduced-motion: reduce) {
   .cur { animation: none; }
