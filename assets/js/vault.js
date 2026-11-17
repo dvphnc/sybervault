@@ -7,6 +7,25 @@
   var store = { get: function (k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
                 set: function (k, v) { try { sessionStorage.setItem(k, v); } catch (e) {} } };
 
+  /* theme: [auto] → [light] → [dark] → [auto]. auto follows the device; a choice is kept in localStorage */
+  var themeBtn = document.querySelector('.theme');
+  if (themeBtn) {
+    var root = document.documentElement, ORDER = ['auto', 'light', 'dark'];
+    var current = function () { return root.getAttribute('data-theme') || 'auto'; };
+    var show = function () {
+      var t = current();
+      themeBtn.textContent = '[' + t + ']';
+      themeBtn.setAttribute('aria-label', 'Theme: ' + t + (t === 'auto' ? ' (follows your device)' : '') + '. Change theme');
+    };
+    themeBtn.addEventListener('click', function () {
+      var t = ORDER[(ORDER.indexOf(current()) + 1) % ORDER.length];
+      if (t === 'auto') root.removeAttribute('data-theme'); else root.setAttribute('data-theme', t);
+      try { if (t === 'auto') localStorage.removeItem('sv-theme'); else localStorage.setItem('sv-theme', t); } catch (e) {}
+      show();
+    });
+    show();
+  }
+
   /* boot sequence */
   var boot = document.querySelector('.boot');
   if (boot && !reduced && !store.get('sv-boot')) {

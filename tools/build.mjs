@@ -3,7 +3,7 @@
 // Page filenames stay the old ones (e.g. "CWE-89 - SQL Injection.html") so every existing link keeps working.
 import { readFileSync, writeFileSync } from 'node:fs';
 
-const V = '202611172';
+const V = '202611173';
 const { meta, notes } = JSON.parse(readFileSync('content/notes.json', 'utf8'));
 const esc = (s) => String(s).replace(/&(?!(amp|lt|gt|quot|#\d+);)/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 const strip = (s) => s.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&');
@@ -21,10 +21,11 @@ const head = (title, desc) => `<!DOCTYPE html>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(desc)}"/>
-  <meta name="color-scheme" content="dark"/>
-  <meta name="theme-color" content="#050806"/>
+  <meta name="color-scheme" content="dark light"/>
+  <meta name="theme-color" content="#050806" media="(prefers-color-scheme: dark)"/>
+  <meta name="theme-color" content="#f5f8ef" media="(prefers-color-scheme: light)"/>
   <link rel="icon" href="${favicon}"/>
-  <script>document.documentElement.classList.add('js');</script>
+  <script>(function(){var d=document.documentElement,t=null;d.classList.add('js');try{t=localStorage.getItem('sv-theme')}catch(e){}if(t==='light'||t==='dark')d.setAttribute('data-theme',t);})();</script>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"/>
@@ -36,6 +37,7 @@ const head = (title, desc) => `<!DOCTYPE html>
 const bar = (path) => `  <header class="bar">
     <a class="brand" href="index.html">sybervault<span class="cur" aria-hidden="true">_</span></a>
     <span class="path">${path}</span>
+    <button class="theme" type="button" aria-label="Theme: auto (follows your device). Change theme">[auto]</button>
     <a class="bar-link" href="${meta.portfolio}">dvphnc ↗</a>
   </header>
 `;

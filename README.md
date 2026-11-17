@@ -6,7 +6,10 @@ Live at https://dvphnc.github.io/sybervault/ · portfolio at https://dvphnc.gith
 
 ## Design: terminal vault
 
-Black screen, green phosphor, monospace everywhere (JetBrains Mono), faint scanlines. One dark theme on purpose.
+Dark: black screen, green phosphor, faint scanlines. Light: a green-bar printout (pale paper, green bands every three
+lines, tractor-feed holes down the edges on wider screens, dark green ink, red CWE tags). Monospace everywhere
+(JetBrains Mono). The theme follows the device; the `[auto]` button in the top bar cycles auto / light / dark and
+remembers the choice (localStorage `sv-theme`).
 The archive types a short unlock sequence once per visit, then lists the entries like `ls` with a working `grep` filter
 (press `/` to focus it, `esc` to clear). Notes read like `cat file.md`: `#` / `##` headings, a phosphor-green cover that
 gets its colour back on hover, `[copy]` on code blocks, and quick-review answers that "decrypt" when opened.
