@@ -1,0 +1,28 @@
+<p>
+<strong>Network Traffic Analysis (NTA)</strong> is the act of capturing, inspecting, and analyzing network data flow to characterize ports and protocols, establish a performance baseline, and monitor/respond to security threats.
+      </p>
+<h2 id="sec-the-nta-process-in-4-steps">The NTA Process in 4 Steps</h2>
+<ol>
+<li><strong>Ingest Traffic:</strong> Capture network data, utilizing capture filters as needed.</li>
+<li><strong>Reduce Noise by Filtering:</strong> Filter out unnecessary or benign traffic for cleaner analysis.</li>
+<li><strong>Analyze and Explore:</strong> Carve out data relevant to the current issue.</li>
+<li><strong>Detect and Alert:</strong> Look for errors and use analysis to determine if traffic is malicious, leveraging tools like Intrusion Detection Systems (IDS).</li>
+</ol>
+<h2 id="sec-nta-analysis-approaches">NTA Analysis Approaches</h2>
+<ul>
+<li><strong>Descriptive:</strong> Describes a data set based on existing characteristics.</li>
+<li><strong>Diagnostic:</strong> Clarifies the causes and effects of network conditions.</li>
+<li><strong>Predictive:</strong> Creates models to forecast future probabilities (e.g., future traffic load).</li>
+<li><strong>Prescriptive:</strong> Aims to narrow down actions to take to prevent or eliminate a future problem.</li>
+</ul>
+<h2 id="sec-essential-nta-tools">Essential NTA Tools</h2>
+<ul>
+<li><strong>Wireshark:</strong> A free and open-source graphical network traffic analyzer. Used for <strong>deep packet inspection</strong>, capturing and decoding frames to inspect protocols layer-by-layer (based on the OSI Model).</li>
+<li><strong>tcpdump / Tshark:</strong> Command-line network packet analyzers.</li>
+<li><strong>Network Taps / Span Ports:</strong> Methods (hardware or switch features) used to copy network traffic for external analysis.</li>
+</ul>
+<h2 id="sec-wireshark-filters">Wireshark Filters</h2>
+<ul>
+<li><strong>Capture Filters</strong> (e.g., <code>tcp port 80</code>): Used to filter packets <em>before</em> they are captured, reducing the data volume.</li>
+<li><strong>Display Filters</strong> (e.g., <code>ip.addr == x.x.x.x</code>): Used to filter or refine the view of packets <em>after</em> they have already been captured.</li>
+</ul>

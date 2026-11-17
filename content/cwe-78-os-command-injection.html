@@ -1,0 +1,36 @@
+<p>
+        Command Injection happens when an attacker tricks a system into executing unintended commands: <strong>convincing a computer to follow whispers it was never meant to hear</strong>.
+      </p>
+<p>
+        When user inputs aren’t properly sanitized, they can escape their intended context and reach the command shell. Suddenly, what was supposed to print a name might delete files or steal data. That’s the quiet power of injection.
+      </p>
+<h2>Definition &amp; Goal</h2>
+<p>
+<strong>OS Command Injection</strong> is a type of attack where the attacker’s goal is to execute arbitrary commands on the victim’s operating system via a vulnerable application.
+      </p>
+<ul>
+<li>Executed through a <strong>vulnerable web app</strong></li>
+<li>Gives attacker <strong>full control over the server</strong></li>
+<li>Can run any command the app process has access to</li>
+</ul>
+<h2 id="sec-why-it-s-so-dangerous">Why It’s So Dangerous</h2>
+<ul>
+<li>Runs arbitrary OS commands</li>
+<li>Works even without direct server access</li>
+<li>If the app runs as root → <strong>Game over</strong></li>
+</ul>
+<h2 id="sec-how-it-works">How It Works</h2>
+<p>
+        User input is directly inserted into system commands without sanitization.<br/>
+        Characters like <code>;</code>, <code>|</code>, <code>&amp;&amp;</code>, <code>$()</code> break out of the intended command.
+      </p>
+<pre><code># Vulnerable code
+user_input = "report.txt"
+system("cat " + user_input)
+
+# Attacker enters:
+report.txt; rm -rf / --no-preserve-root</code></pre>
+
+<p style="text-align:center;font-style:italic;color:var(--g500);">
+        This is why OS Command Injection remains one of the most devastating vulnerabilities in existence.
+      </p>

@@ -1,0 +1,45 @@
+<p>
+<strong>Improper Neutralization of Input During Web Page Generation</strong> (aka Cross-site Scripting) is a web security vulnerability that allows an attacker to <strong>compromise user interactions</strong> with a vulnerable web application.<br/>
+        It happens due to <strong>improper neutralization of user input</strong> that gets rendered in a web page.
+      </p>
+<h2 id="sec-how-does-xss-work">How Does XSS Work?</h2>
+<p>XSS occurs when:</p>
+<ul>
+<li>User input is included in web pages <strong>without proper validation or encoding</strong>.</li>
+<li>Attackers inject <strong>malicious scripts (usually JavaScript)</strong> that execute in the victim’s browser.</li>
+<li>The browser <strong>trusts</strong> the script because it appears to come from the legitimate site.</li>
+</ul>
+<h2 id="sec-types-of-xss-attacks">Types of XSS Attacks</h2>
+<table>
+<tr><th>Type</th><th>Description</th></tr>
+<tr><td><strong>Reflected XSS (Type 1 / Non-Persistent)</strong></td><td>The malicious script is <strong>immediately reflected</strong> off the web server, typically via a crafted link or form submission.</td></tr>
+<tr><td><strong>Stored XSS (Type 2 / Persistent)</strong></td><td>The injected script is <strong>stored on the server</strong> (e.g., in a database, forum post, or comment) and runs when users view that content.</td></tr>
+<tr><td><strong>DOM-Based XSS (Type 0)</strong></td><td>The attack happens <strong>entirely on the client side</strong> when JavaScript modifies the DOM without sanitizing user input.</td></tr>
+<tr><td><strong>uXSS (Universal XSS)</strong></td><td>Exploits <strong>vulnerabilities in browsers or plugins</strong> rather than the web app itself.</td></tr>
+<tr><td><strong>Self-XSS</strong></td><td>Tricks the user into <strong>executing malicious scripts</strong> in their own browser console or input field.</td></tr>
+</table>
+<h2 id="sec-xss-attack-consequences">XSS Attack Consequences</h2>
+<ul>
+<li><strong>Session Hijacking</strong>: Steal cookies or session tokens.</li>
+<li><strong>Data Theft</strong>: Access sensitive user data.</li>
+<li><strong>Website Defacement</strong>: Modify or vandalize site content.</li>
+<li><strong>Malware Distribution</strong>: Inject malicious code to infect visitors.</li>
+<li><strong>Account Takeover</strong>: Gain control of user accounts.</li>
+<li><strong>Unauthorized Actions</strong>: Perform actions as the victim.</li>
+<li><strong>Further Attacks</strong>: Launch phishing or lateral attacks.</li>
+</ul>
+<h2 id="sec-xss-prevention-techniques">XSS Prevention Techniques</h2>
+<table>
+<tr><th>Method</th><th>Description</th></tr>
+<tr><td><strong>Input Validation</strong></td><td>Check and restrict input to expected patterns, length, and type.</td></tr>
+<tr><td><strong>Contextual Output Encoding/Escaping</strong></td><td>Encode data based on where it appears (HTML, JS, URL, etc.) to prevent script execution.</td></tr>
+<tr><td><strong>Sanitization</strong></td><td>Remove or modify harmful input before rendering.</td></tr>
+<tr><td><strong>HTTPOnly Cookies</strong></td><td>Prevent JavaScript from accessing sensitive cookies.</td></tr>
+<tr><td><strong>Content Security Policy (CSP)</strong></td><td>A browser-level defense restricting which scripts can execute on the page.</td></tr>
+</table>
+<h2 id="sec-summary">Summary</h2>
+<ul>
+<li><strong>XSS</strong> lets attackers execute malicious scripts in users’ browsers.</li>
+<li>It exploits <strong>trust between browser and site</strong>.</li>
+<li>Prevent by <strong>validating, encoding, sanitizing</strong>, and enforcing <strong>CSP</strong>.</li>
+</ul>

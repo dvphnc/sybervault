@@ -1,0 +1,950 @@
+{
+  "meta": {
+    "count": 12,
+    "about": "Notes from my cybersecurity studies: ISC2 CC training and CTF practice.",
+    "tryhackme": "https://tryhackme.com/p/dvphnc",
+    "portfolio": "https://dvphnc.github.io/"
+  },
+  "notes": [
+    {
+      "n": 1,
+      "file": "CWE-89 - SQL Injection.html",
+      "slug": "cwe-89-sql-injection",
+      "tag": "cwe-89",
+      "short": "SQL Injection",
+      "desc": "Manipulating database queries through unvalidated input.",
+      "title": "CWE-89: SQL Injection",
+      "sub": "The crown jewel of web vulnerabilities",
+      "category": "Threats & Attacks",
+      "cover": "covers/sqli.webp",
+      "toc": [
+        {
+          "id": "sec-what-is-sql",
+          "text": "What Is SQL?"
+        },
+        {
+          "id": "sec-how-sql-injection-happens",
+          "text": "How SQL Injection Happens"
+        },
+        {
+          "id": "sec-the-login-bypass",
+          "text": "The Login Bypass"
+        },
+        {
+          "id": "sec-why-sql-injection-is-dangerous",
+          "text": "Why SQL Injection Is Dangerous"
+        },
+        {
+          "id": "sec-mitigation-strategies",
+          "text": "Mitigation Strategies"
+        }
+      ],
+      "quote": "Remember: SQL Injection thrives where trust is misplaced. Validate, parameterize, and never trust user input.",
+      "review": [
+        {
+          "q": "What is SQL Injection?",
+          "a": "Inserting malicious SQL via unvalidated input to manipulate database operations."
+        },
+        {
+          "q": "What does ' OR '1'='1 do?",
+          "a": "Makes the WHERE clause always true, bypassing login authentication."
+        },
+        {
+          "q": "Best prevention for SQLi?",
+          "a": "Prepared statements: input is treated as data, never as executable SQL."
+        },
+        {
+          "q": "What else can SQLi lead to?",
+          "a": "RCE via database features like xp_cmdshell; full server compromise."
+        }
+      ],
+      "terms": [
+        {
+          "t": "CWE-89",
+          "d": "SQL Injection weakness"
+        },
+        {
+          "t": "SQLi",
+          "d": "SQL Injection attack type"
+        },
+        {
+          "t": "Prepared Statement",
+          "d": "Pre-compiled SQL preventing injection"
+        },
+        {
+          "t": "Auth Bypass",
+          "d": "Access without valid credentials"
+        },
+        {
+          "t": "Tautology",
+          "d": "Always-true SQL condition"
+        },
+        {
+          "t": "Least Privilege",
+          "d": "DB user has minimal permissions"
+        }
+      ]
+    },
+    {
+      "n": 2,
+      "file": "CWE-79 - Cross-Site Scripting (XSS).html",
+      "slug": "cwe-79-cross-site-scripting-xss",
+      "tag": "cwe-79",
+      "short": "Cross-Site Scripting (XSS)",
+      "desc": "Reflected, stored and DOM-based XSS, with mitigations.",
+      "title": "CWE-79: Cross-Site Scripting (XSS)",
+      "sub": "The most common and dangerous web vulnerability",
+      "category": "Threats & Attacks",
+      "cover": "covers/xss.webp",
+      "toc": [
+        {
+          "id": "sec-how-does-xss-work",
+          "text": "How Does XSS Work?"
+        },
+        {
+          "id": "sec-types-of-xss-attacks",
+          "text": "Types of XSS Attacks"
+        },
+        {
+          "id": "sec-xss-attack-consequences",
+          "text": "XSS Attack Consequences"
+        },
+        {
+          "id": "sec-xss-prevention-techniques",
+          "text": "XSS Prevention Techniques"
+        },
+        {
+          "id": "sec-summary",
+          "text": "Summary"
+        }
+      ],
+      "quote": "Never trust what the user sends. Because one day, the user will be you.",
+      "review": [
+        {
+          "q": "What is Reflected XSS?",
+          "a": "Script immediately reflected off the server via a crafted link."
+        },
+        {
+          "q": "What is Stored XSS?",
+          "a": "Injected script stored on server, runs for every visitor of that content."
+        },
+        {
+          "q": "What is DOM-Based XSS?",
+          "a": "Attack happens entirely client-side via unsafe JavaScript DOM manipulation."
+        },
+        {
+          "q": "How does CSP prevent XSS?",
+          "a": "Restricts which scripts can execute on a page at the browser level."
+        }
+      ],
+      "terms": [
+        {
+          "t": "CWE-79",
+          "d": "Cross-Site Scripting weakness"
+        },
+        {
+          "t": "XSS",
+          "d": "Script injection into web pages"
+        },
+        {
+          "t": "DOM",
+          "d": "Browser's HTML representation"
+        },
+        {
+          "t": "CSP",
+          "d": "Content Security Policy"
+        },
+        {
+          "t": "HTTPOnly",
+          "d": "Cookie flag blocking JS access"
+        },
+        {
+          "t": "Session Hijack",
+          "d": "Stealing tokens to impersonate users"
+        }
+      ]
+    },
+    {
+      "n": 3,
+      "file": "CWE-78 - OS Command Injection.html",
+      "slug": "cwe-78-os-command-injection",
+      "tag": "cwe-78",
+      "short": "OS Command Injection",
+      "desc": "Shell escapes via unsanitized input, and why allowlists matter.",
+      "title": "CWE-78: OS Command Injection",
+      "sub": "When a web form becomes a root shell",
+      "category": "Threats & Attacks",
+      "cover": "covers/command.webp",
+      "toc": [
+        {
+          "id": "sec-definition-goal",
+          "text": "Definition &amp; Goal"
+        },
+        {
+          "id": "sec-why-it-s-so-dangerous",
+          "text": "Why It’s So Dangerous"
+        },
+        {
+          "id": "sec-how-it-works",
+          "text": "How It Works"
+        }
+      ],
+      "quote": "One semicolon. One pipe. And the server becomes yours.",
+      "review": [
+        {
+          "q": "What causes OS Command Injection?",
+          "a": "User input passed to a shell without sanitization, enabling escape via ; | &amp;&amp; $()"
+        },
+        {
+          "q": "Which characters enable injection?",
+          "a": "Semicolons (;), pipes (|), double ampersands (&amp;&amp;), subshell $()."
+        },
+        {
+          "q": "Why is this critical?",
+          "a": "Arbitrary OS command execution; root access means full system compromise."
+        },
+        {
+          "q": "How do you prevent it?",
+          "a": "Never pass raw input to shells. Use parameterized APIs and allowlists."
+        }
+      ],
+      "terms": [
+        {
+          "t": "CWE-78",
+          "d": "OS Command Injection weakness"
+        },
+        {
+          "t": "RCE",
+          "d": "Remote Code Execution"
+        },
+        {
+          "t": "Shell",
+          "d": "Command-line OS interface"
+        },
+        {
+          "t": "Sanitization",
+          "d": "Removing dangerous input characters"
+        },
+        {
+          "t": "Allowlist",
+          "d": "Permit only known-safe inputs"
+        },
+        {
+          "t": "Least Privilege",
+          "d": "Minimal permissions for processes"
+        }
+      ]
+    },
+    {
+      "n": 4,
+      "file": "CWE-35 - Path Traversal.html",
+      "slug": "cwe-35-path-traversal",
+      "tag": "cwe-35",
+      "short": "Path Traversal",
+      "desc": "Walking outside the web root with ../, encoding tricks included.",
+      "title": "CWE-35: Path Traversal",
+      "sub": "How attackers walk outside the web root",
+      "category": "Threats & Attacks",
+      "cover": "covers/traversal.webp",
+      "toc": [
+        {
+          "id": "sec-file-system",
+          "text": "File System"
+        },
+        {
+          "id": "sec-directory-traversal-attacks",
+          "text": "Directory Traversal Attacks"
+        },
+        {
+          "id": "sec-consequences-of-directory-traversal",
+          "text": "Consequences of Directory Traversal"
+        },
+        {
+          "id": "sec-directory-traversal-techniques",
+          "text": "Directory Traversal Techniques"
+        },
+        {
+          "id": "sec-preventing-directory-traversal",
+          "text": "Preventing Directory Traversal"
+        },
+        {
+          "id": "sec-directory-traversal-tools-for-testing-assessment",
+          "text": "Directory Traversal Tools (for testing &amp; assessment)"
+        },
+        {
+          "id": "sec-summary-conclusion",
+          "text": "Summary / Conclusion"
+        }
+      ],
+      "quote": "In secure coding, the door is locked. Path Traversal doesn’t break the lock; it simply walks around the wall.",
+      "review": [
+        {
+          "q": "What is path traversal?",
+          "a": "Using ../ to access files outside the intended application directory."
+        },
+        {
+          "q": "What is double encoding?",
+          "a": "Encoding ../ as %252e%252e%252f to bypass single-pass URL decoders."
+        },
+        {
+          "q": "What is null byte injection?",
+          "a": "%00 terminates strings early in legacy C-style APIs."
+        },
+        {
+          "q": "Best prevention?",
+          "a": "Allowlists of valid filenames + realpath() verification within an allowed directory."
+        }
+      ],
+      "terms": [
+        {
+          "t": "CWE-35",
+          "d": "Path Traversal weakness"
+        },
+        {
+          "t": "../",
+          "d": "Move up one directory level"
+        },
+        {
+          "t": "Null Byte",
+          "d": "%00 to terminate strings early"
+        },
+        {
+          "t": "realpath()",
+          "d": "Resolves path to canonical form"
+        },
+        {
+          "t": "Allowlist",
+          "d": "Only permit safe file names"
+        },
+        {
+          "t": "Chroot",
+          "d": "Isolate process to restricted filesystem"
+        }
+      ]
+    },
+    {
+      "n": 5,
+      "file": "Introduction to Web Application Security.html",
+      "slug": "introduction-to-web-application-security",
+      "tag": "basics",
+      "short": "Introduction to Web Application Security",
+      "desc": "Modern web threats and the OWASP Top 10.",
+      "title": "Introduction to Web Application Security",
+      "sub": "The foundation of online trust",
+      "category": "Fundamentals",
+      "cover": "covers/web-security-intro.webp",
+      "toc": [
+        {
+          "id": "sec-a-look-back-the-evolution-of-the-web",
+          "text": "A Look Back: The Evolution of the Web"
+        },
+        {
+          "id": "sec-arpanet-vs-old-web-vs-modern-web",
+          "text": "ARPANET vs Old Web vs Modern Web"
+        },
+        {
+          "id": "sec-the-cia-triad",
+          "text": "The CIA Triad"
+        },
+        {
+          "id": "sec-case-study-blackcat-alphv-ransomware",
+          "text": "Case Study: BlackCat (ALPHV) Ransomware"
+        },
+        {
+          "id": "sec-proactive-defense-checklist",
+          "text": "Proactive Defense Checklist"
+        },
+        {
+          "id": "sec-anatomy-of-a-url",
+          "text": "Anatomy of a URL"
+        },
+        {
+          "id": "sec-owasp-top-10-your-starting-point",
+          "text": "OWASP Top 10: Your Starting Point"
+        }
+      ],
+      "quote": "Web Application Security isn’t just a technical discipline; it’s the foundation of online trust. From ARPANET’s open beginnings to today’s hyperconnected world, the mission remains the same: <strong>to protect information, ensure availability, and maintain integrity across the web.</strong>",
+      "review": [
+        {
+          "q": "What is OWASP?",
+          "a": "Open Web Application Security Project: publishes the Top 10 most critical web app risks."
+        },
+        {
+          "q": "Old web vs modern web?",
+          "a": "Old web: static pages. Modern web: dynamic, cloud-powered, prime attack target."
+        },
+        {
+          "q": "What was ARPANET?",
+          "a": "First packet-switching network (1969), predecessor to the internet."
+        },
+        {
+          "q": "Name 3 proactive defense items.",
+          "a": "Enforce MFA, run pen tests, patch everything, segment networks, test incident response."
+        }
+      ],
+      "terms": [
+        {
+          "t": "OWASP Top 10",
+          "d": "Most critical web security risks"
+        },
+        {
+          "t": "ARPANET",
+          "d": "First packet-switching network, 1969"
+        },
+        {
+          "t": "CIA Triad",
+          "d": "Confidentiality, Integrity, Availability"
+        },
+        {
+          "t": "Ransomware",
+          "d": "Encrypts data and demands ransom"
+        },
+        {
+          "t": "MFA",
+          "d": "Multi-Factor Authentication"
+        },
+        {
+          "t": "URL",
+          "d": "Uniform Resource Locator"
+        }
+      ]
+    },
+    {
+      "n": 6,
+      "file": "Importance of Cyber Security.html",
+      "slug": "importance-of-cyber-security",
+      "tag": "basics",
+      "short": "Importance of Cyber Security",
+      "desc": "The CIA triad and real-world impact.",
+      "title": "Importance of Cyber Security",
+      "sub": "The invisible shield of the digital age",
+      "category": "Fundamentals",
+      "cover": "covers/cyber-importance.webp",
+      "toc": [
+        {
+          "id": "sec-the-cia-triad",
+          "text": "The CIA Triad"
+        },
+        {
+          "id": "sec-violations-of-security-principles",
+          "text": "Violations of Security Principles"
+        }
+      ],
+      "quote": "Cybersecurity is more than technology; it’s about protecting trust. By ensuring confidentiality, integrity, and availability, we maintain stability, privacy, and confidence in the digital world.",
+      "review": [
+        {
+          "q": "What does the CIA Triad stand for?",
+          "a": "Confidentiality, Integrity, Availability: the three core pillars of cybersecurity."
+        },
+        {
+          "q": "What does Confidentiality mean?",
+          "a": "Ensuring information is accessible only to authorized users."
+        },
+        {
+          "q": "Give an example of an Availability failure.",
+          "a": "A hospital's systems going offline due to a DDoS attack."
+        },
+        {
+          "q": "What is a violation of Integrity?",
+          "a": "Tampering with data so it no longer reflects the truth."
+        }
+      ],
+      "terms": [
+        {
+          "t": "CIA Triad",
+          "d": "Confidentiality, Integrity, Availability"
+        },
+        {
+          "t": "Confidentiality",
+          "d": "Restricting data to authorized users"
+        },
+        {
+          "t": "Integrity",
+          "d": "Data is accurate and unaltered"
+        },
+        {
+          "t": "Availability",
+          "d": "Systems accessible when needed"
+        },
+        {
+          "t": "Cybersecurity",
+          "d": "Protecting systems, networks and data"
+        },
+        {
+          "t": "Data Breach",
+          "d": "Unauthorized access to sensitive info"
+        }
+      ]
+    },
+    {
+      "n": 7,
+      "file": "Encryption Fundamentals.html",
+      "slug": "encryption-fundamentals",
+      "tag": "basics",
+      "short": "Encryption Fundamentals",
+      "desc": "Symmetric, asymmetric, hashing and PKI.",
+      "title": "Encryption Fundamentals",
+      "sub": "How the internet learned to keep a secret",
+      "category": "Fundamentals",
+      "cover": "covers/encryption.webp",
+      "toc": [
+        {
+          "id": "sec-principles-of-cryptography",
+          "text": "Principles of Cryptography"
+        },
+        {
+          "id": "sec-core-components",
+          "text": "Core Components"
+        },
+        {
+          "id": "sec-cryptography-in-internet-security",
+          "text": "Cryptography in Internet Security"
+        },
+        {
+          "id": "sec-end-to-end-vs-transport-encryption",
+          "text": "End-to-End vs. Transport Encryption"
+        },
+        {
+          "id": "sec-certificate-authorities-and-digital-trust",
+          "text": "Certificate Authorities and Digital Trust"
+        }
+      ],
+      "quote": "Encryption not only hides information but also builds digital trust and security. It is a fundamental pillar of privacy and safe communication in the modern internet.",
+      "review": [
+        {
+          "q": "What is encryption?",
+          "a": "Converting readable data into ciphertext, accessible only with the correct key."
+        },
+        {
+          "q": "E2E vs transport encryption?",
+          "a": "E2E: only communicating parties read messages. Transport: secured only during transmission."
+        },
+        {
+          "q": "What is a Certificate Authority?",
+          "a": "A trusted entity that issues digital certificates to verify website legitimacy."
+        },
+        {
+          "q": "What are hash functions for?",
+          "a": "Generating unique data fingerprints for integrity verification."
+        }
+      ],
+      "terms": [
+        {
+          "t": "Ciphertext",
+          "d": "Encrypted, unreadable data form"
+        },
+        {
+          "t": "Hash Function",
+          "d": "One-way unique data fingerprint"
+        },
+        {
+          "t": "PKI",
+          "d": "Public Key Infrastructure"
+        },
+        {
+          "t": "TLS",
+          "d": "Transport Layer Security"
+        },
+        {
+          "t": "X.509",
+          "d": "Standard digital certificate format"
+        },
+        {
+          "t": "E2E",
+          "d": "Only sender/receiver can read"
+        }
+      ]
+    },
+    {
+      "n": 8,
+      "file": "Cloud and Virtualization Fundamentals.html",
+      "slug": "cloud-and-virtualization-fundamentals",
+      "tag": "basics",
+      "short": "Cloud &amp; Virtualization Fundamentals",
+      "desc": "Hypervisors, cloud models and cloud security.",
+      "title": "Cloud &amp; Virtualization Fundamentals",
+      "sub": "The invisible foundation of the modern internet",
+      "category": "Fundamentals",
+      "cover": "covers/cloudstorage.webp",
+      "toc": [
+        {
+          "id": "sec-virtualization",
+          "text": "Virtualization"
+        },
+        {
+          "id": "sec-cloud-storage",
+          "text": "Cloud Storage"
+        },
+        {
+          "id": "sec-deployment-models",
+          "text": "Deployment Models"
+        },
+        {
+          "id": "sec-cloud-access-security-broker-casb",
+          "text": "Cloud Access Security Broker (CASB)"
+        }
+      ],
+      "quote": "Though the term “cloud” sounds abstract, it represents complex infrastructures powered by virtualization and secured by layered defenses. Together, they make modern computing flexible, efficient, and secure.",
+      "review": [
+        {
+          "q": "What is a hypervisor?",
+          "a": "Software enabling multiple OS instances on one physical machine."
+        },
+        {
+          "q": "Name the 3 cloud deployment models.",
+          "a": "Public Cloud (shared), Private Cloud (dedicated), Hybrid Cloud (both)."
+        },
+        {
+          "q": "What is a CASB?",
+          "a": "Cloud Access Security Broker: enforces policies between users and cloud services."
+        },
+        {
+          "q": "What is cloud storage?",
+          "a": "Remote data storage accessed over the internet."
+        }
+      ],
+      "terms": [
+        {
+          "t": "Hypervisor",
+          "d": "Creates and manages virtual machines"
+        },
+        {
+          "t": "VM",
+          "d": "Virtual Machine: isolated OS instance"
+        },
+        {
+          "t": "CASB",
+          "d": "Cloud Access Security Broker"
+        },
+        {
+          "t": "Public Cloud",
+          "d": "Shared resources: AWS, Azure, GCP"
+        },
+        {
+          "t": "Private Cloud",
+          "d": "Dedicated cloud for one org"
+        },
+        {
+          "t": "Hybrid Cloud",
+          "d": "Mix of public and private cloud"
+        }
+      ]
+    },
+    {
+      "n": 9,
+      "file": "Network Traffic Analysis.html",
+      "slug": "network-traffic-analysis",
+      "tag": "network",
+      "short": "Network Traffic Analysis",
+      "desc": "Wireshark, capture filters and deep packet inspection.",
+      "title": "Network Traffic Analysis",
+      "sub": "Capture. Filter. Analyze. Dominate the wire.",
+      "category": "Extra Topics",
+      "cover": "covers/net.webp",
+      "toc": [
+        {
+          "id": "sec-the-nta-process-in-4-steps",
+          "text": "The NTA Process in 4 Steps"
+        },
+        {
+          "id": "sec-nta-analysis-approaches",
+          "text": "NTA Analysis Approaches"
+        },
+        {
+          "id": "sec-essential-nta-tools",
+          "text": "Essential NTA Tools"
+        },
+        {
+          "id": "sec-wireshark-filters",
+          "text": "Wireshark Filters"
+        }
+      ],
+      "quote": "Every packet tells a story. Learn to read it before it reads you.",
+      "review": [
+        {
+          "q": "What are capture filters?",
+          "a": "Applied before capture to limit what's recorded (e.g. tcp port 80)."
+        },
+        {
+          "q": "What are display filters?",
+          "a": "Applied after capture to refine the view (e.g. ip.addr == x.x.x.x)."
+        },
+        {
+          "q": "Name the 4 NTA analysis types.",
+          "a": "Descriptive, Diagnostic, Predictive, Prescriptive."
+        },
+        {
+          "q": "What is deep packet inspection?",
+          "a": "Examining packet contents layer-by-layer using the OSI model."
+        }
+      ],
+      "terms": [
+        {
+          "t": "NTA",
+          "d": "Network Traffic Analysis"
+        },
+        {
+          "t": "Wireshark",
+          "d": "Graphical packet analyzer"
+        },
+        {
+          "t": "Capture Filter",
+          "d": "Limits packets before recording"
+        },
+        {
+          "t": "Display Filter",
+          "d": "Refines captured packet view"
+        },
+        {
+          "t": "SPAN Port",
+          "d": "Switch traffic copy feature"
+        },
+        {
+          "t": "IDS",
+          "d": "Intrusion Detection System"
+        }
+      ]
+    },
+    {
+      "n": 10,
+      "file": "Email Security Fundamentals.html",
+      "slug": "email-security-fundamentals",
+      "tag": "email",
+      "short": "Email Security Fundamentals",
+      "desc": "SPF, DKIM, DMARC and phishing defences.",
+      "title": "Email Security Fundamentals",
+      "sub": "A quick guide to keeping your inbox safe",
+      "category": "Extra Topics",
+      "cover": "covers/email.webp",
+      "toc": [
+        {
+          "id": "sec-key-pillars-of-email-security",
+          "text": "Key Pillars of Email Security"
+        },
+        {
+          "id": "sec-protecting-data-with-encryption",
+          "text": "Protecting Data with Encryption"
+        },
+        {
+          "id": "sec-common-email-threats",
+          "text": "Common Email Threats"
+        },
+        {
+          "id": "sec-analyzing-email-authenticity",
+          "text": "Analyzing Email Authenticity"
+        }
+      ],
+      "quote": "Your inbox is the front door to your digital life. Lock it or lose everything.",
+      "review": [
+        {
+          "q": "What does SPF do?",
+          "a": "Verifies the sending IP is authorized by the domain's DNS records."
+        },
+        {
+          "q": "What does DKIM provide?",
+          "a": "Cryptographic signature verifying authenticity and integrity of the email."
+        },
+        {
+          "q": "What is spear phishing?",
+          "a": "Targeted phishing using personalized info to deceive a specific person."
+        },
+        {
+          "q": "What is BEC?",
+          "a": "Business Email Compromise: impersonating executives to initiate fraud."
+        }
+      ],
+      "terms": [
+        {
+          "t": "SPF",
+          "d": "Sender Policy Framework"
+        },
+        {
+          "t": "DKIM",
+          "d": "DomainKeys Identified Mail"
+        },
+        {
+          "t": "DMARC",
+          "d": "Auth failure policy framework"
+        },
+        {
+          "t": "Phishing",
+          "d": "Deceptive credential-theft emails"
+        },
+        {
+          "t": "BEC",
+          "d": "Business Email Compromise"
+        },
+        {
+          "t": "S/MIME",
+          "d": "Secure email standard"
+        }
+      ]
+    },
+    {
+      "n": 11,
+      "file": "Burp Suite Introduction.html",
+      "slug": "burp-suite-introduction",
+      "tag": "tools",
+      "short": "Burp Suite Fundamentals",
+      "desc": "Proxy, Intruder and Repeater, practised on DVWA.",
+      "title": "Burp Suite Fundamentals",
+      "sub": "The platform that redefined web security testing",
+      "category": "Tools & Career",
+      "cover": "covers/burp.webp",
+      "toc": [
+        {
+          "id": "sec-core-components",
+          "text": "Core Components"
+        },
+        {
+          "id": "sec-intruder-attack-types",
+          "text": "Intruder Attack Types"
+        },
+        {
+          "id": "sec-best-practice-pair-with-dvwa",
+          "text": "Best Practice: Pair with DVWA"
+        },
+        {
+          "id": "sec-quick-setup-reminder",
+          "text": "Quick Setup Reminder"
+        }
+      ],
+      "quote": "Combine Burp Suite + DVWA for the ultimate beginner-friendly web security lab!",
+      "review": [
+        {
+          "q": "What is Burp Proxy?",
+          "a": "Intercepts and modifies HTTP/S traffic between browser and server."
+        },
+        {
+          "q": "What is Cluster Bomb?",
+          "a": "Tests all combinations of multiple payload sets: full brute force."
+        },
+        {
+          "q": "What is Repeater for?",
+          "a": "Manually edit and resend individual HTTP requests."
+        },
+        {
+          "q": "What is DVWA?",
+          "a": "Damn Vulnerable Web Application: safe legal practice environment."
+        }
+      ],
+      "terms": [
+        {
+          "t": "Proxy",
+          "d": "Intercepts HTTP/S traffic"
+        },
+        {
+          "t": "Intruder",
+          "d": "Automates payload attacks"
+        },
+        {
+          "t": "Repeater",
+          "d": "Manually resend HTTP requests"
+        },
+        {
+          "t": "Sequencer",
+          "d": "Analyzes token randomness"
+        },
+        {
+          "t": "DVWA",
+          "d": "Damn Vulnerable Web App"
+        },
+        {
+          "t": "Cluster Bomb",
+          "d": "All payload combinations"
+        }
+      ]
+    },
+    {
+      "n": 12,
+      "file": "Career Opportunities in IT Security.html",
+      "slug": "career-opportunities-in-it-security",
+      "tag": "career",
+      "short": "Career in Cybersecurity",
+      "desc": "Red team, blue team, SOC, DFIR and pentest paths.",
+      "title": "Career in Cybersecurity",
+      "sub": "Red Team, Blue Team: choose your side",
+      "category": "Tools & Career",
+      "cover": "covers/career.webp",
+      "toc": [
+        {
+          "id": "sec-what-is-cybersecurity",
+          "text": "What is Cybersecurity?"
+        },
+        {
+          "id": "sec-red-vs-blue-teams",
+          "text": "Red vs Blue Teams"
+        },
+        {
+          "id": "sec-expanded-roles-in-it-security",
+          "text": "Expanded Roles in IT Security"
+        },
+        {
+          "id": "sec-what-s-a-soc",
+          "text": "What’s a SOC?"
+        },
+        {
+          "id": "sec-three-pillars-of-cybersecurity",
+          "text": "Three Pillars of Cybersecurity"
+        },
+        {
+          "id": "sec-vulnerability-scanning-vs-penetration-testing",
+          "text": "Vulnerability Scanning vs Penetration Testing"
+        },
+        {
+          "id": "sec-penetration-testing-life-cycle",
+          "text": "Penetration Testing Life Cycle"
+        },
+        {
+          "id": "sec-quick-recommendations",
+          "text": "Quick Recommendations"
+        }
+      ],
+      "quote": "The internet is broken. Someone has to fix it. That someone could be you.",
+      "review": [
+        {
+          "q": "What does a SOC Analyst do?",
+          "a": "Monitors, detects, and responds to threats 24/7 using SIEM and EDR."
+        },
+        {
+          "q": "What is the Red Team?",
+          "a": "Simulates real adversary attacks to find exploitable vulnerabilities."
+        },
+        {
+          "q": "What does DFIR stand for?",
+          "a": "Digital Forensics and Incident Response."
+        },
+        {
+          "q": "Stages of a pentest?",
+          "a": "Recon → Scanning → Gaining Access → Maintaining Access → Covering Tracks → Reporting."
+        }
+      ],
+      "terms": [
+        {
+          "t": "SOC",
+          "d": "Security Operations Center"
+        },
+        {
+          "t": "Red Team",
+          "d": "Offensive attack simulators"
+        },
+        {
+          "t": "Blue Team",
+          "d": "Defensive security responders"
+        },
+        {
+          "t": "DFIR",
+          "d": "Digital Forensics &amp; Incident Response"
+        },
+        {
+          "t": "Threat Hunter",
+          "d": "Proactive threat seeker"
+        },
+        {
+          "t": "OSCP",
+          "d": "Top offensive security certification"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,53 @@
+<p>
+        SQL Injection (SQLi) is one of the most notorious and impactful web vulnerabilities. It occurs when a web application builds a database query using <strong>unvalidated user input</strong>, allowing attackers to manipulate SQL commands and gain unauthorized access to data.
+      </p>
+<p>
+        When software fails to <strong>neutralize special characters</strong> (like <code>'</code>, <code>"</code>, <code>;</code>, <code>--</code>), attackers can alter how queries are executed, often with devastating results.
+      </p>
+<h2 id="sec-what-is-sql">What Is SQL?</h2>
+<p>
+<strong>Structured Query Language (SQL)</strong> is the standard language for managing and manipulating relational databases.
+      </p>
+<p>It allows developers to:</p>
+<ul>
+<li>Retrieve information (<code>SELECT</code>)</li>
+<li>Add or modify data (<code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code>)</li>
+<li>Control access (<code>GRANT</code>, <code>REVOKE</code>)</li>
+</ul>
+<h2 id="sec-how-sql-injection-happens">How SQL Injection Happens</h2>
+<p>
+        A vulnerable app constructs SQL commands directly from user input without proper sanitization.
+      </p>
+<pre><code># Vulnerable example
+username = request.GET['user']
+query = "SELECT * FROM users WHERE username = '" + username + "';"
+cursor.execute(query)</code></pre>
+<p>
+        Input: <code>' OR '1'='1</code> → Final query: <code>SELECT * FROM users WHERE username = '' OR '1'='1';</code>
+</p>
+<h2 id="sec-the-login-bypass">The Login Bypass</h2>
+<table>
+<tr><th>Input Field</th><th>Attacker Enters</th><th>Result</th></tr>
+<tr><td><strong>Username</strong></td><td><code>' OR '1'='1</code></td><td>Bypasses authentication</td></tr>
+<tr><td><strong>Password</strong></td><td><code>anything</code></td><td>Ignored, always true</td></tr>
+</table>
+<h2 id="sec-why-sql-injection-is-dangerous">Why SQL Injection Is Dangerous</h2>
+<table>
+<tr><th>Impact</th><th>Description</th></tr>
+<tr><td><strong>Data Breach</strong></td><td>Steal credentials, PII, credit cards</td></tr>
+<tr><td><strong>Data Loss</strong></td><td>Modify or delete records</td></tr>
+<tr><td><strong>Full Compromise</strong></td><td>RCE via DB in extreme cases</td></tr>
+</table>
+<h2 id="sec-mitigation-strategies">Mitigation Strategies</h2>
+<h3>1. Prepared Statements</h3>
+<ul>
+<li>Define query structure first</li>
+<li>Bind user input as data, never code</li>
+</ul>
+<pre><code>SELECT * FROM users WHERE username = ? AND status = ?;</code></pre>
+<h3>2. Input Validation + Least Privilege</h3>
+<ul>
+<li>Whitelist allowed characters</li>
+<li>Never run DB as root/sa</li>
+<li>Hide real errors from users</li>
+</ul>

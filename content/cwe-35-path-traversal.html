@@ -1,0 +1,64 @@
+<p>
+<em>Directory Traversal</em> (aka Path Traversal) is a vulnerability that allows an attacker to access files and directories <strong>outside the intended application directory</strong> by manipulating file path input. Exploits often use traversal sequences (e.g., <code>../</code>) or encoded variants to reach sensitive filesystem locations.
+      </p>
+<h2 id="sec-file-system">File System</h2>
+<p>
+        A <strong>file system</strong> is the operating system component that organizes and stores files and directories on persistent storage. Web applications interact with the file system to read or write resources (pages, uploads, config files). Improper handling of file paths can expose the underlying file system to attacker control.
+      </p>
+<h2 id="sec-directory-traversal-attacks">Directory Traversal Attacks</h2>
+<p>
+<strong>Directory Traversal Attacks</strong> occur when an application accepts a path or filename from an external source and fails to properly validate or normalize it. The attacker crafts input to traverse directories (e.g., <code>../../etc/passwd</code>) and access files outside the web root or allowed directories.
+      </p>
+<h2 id="sec-consequences-of-directory-traversal">Consequences of Directory Traversal</h2>
+<ul>
+<li><strong>Unauthorized Access to Sensitive Information</strong><br/>Attackers can read confidential files outside the web root (e.g., system config, <code>/etc/passwd</code>, database credentials, source code), causing data breaches and privacy violations.</li>
+<li><strong>Modification or Deletion of Files</strong><br/>If write access is possible, attackers may modify or delete critical files, causing service disruption, data loss, and financial or operational damage.</li>
+<li><strong>Further System Compromise</strong><br/>Access to sensitive files can reveal server architecture, credentials, and configurations that facilitate privilege escalation or lateral movement.</li>
+<li><strong>Information Disclosure &amp; Reconnaissance</strong><br/>Even read-only access can provide valuable intelligence for subsequent attacks (paths, versions, error messages).</li>
+</ul>
+<h2 id="sec-directory-traversal-techniques">Directory Traversal Techniques</h2>
+<ul>
+<li><strong>Simple Dot-Dot-Slash (<code>../</code>)</strong>: basic upward traversal.</li>
+<li><strong>Path Separator Variations (<code>/</code>, <code>\</code>)</strong>: platform-specific separators.</li>
+<li><strong>Percent-Encoding (<code>%2e%2e%2f</code>)</strong>: URL-encoded traversal.</li>
+<li><strong>Double Encoding (<code>%252e%252e%252f</code>)</strong>: encoder confusion bypass.</li>
+<li><strong>Unicode Encoding (<code>%u002e%u002e%u002f</code>)</strong>: Unicode-encoded traversal.</li>
+<li><strong>Mangled Paths (<code>....//...</code>)</strong>: path normalization tricks.</li>
+<li><strong>NULL Byte Injection (<code>%00</code>)</strong>: terminating strings in some legacy APIs.</li>
+</ul>
+<p>
+<em>Attackers chain these techniques to bypass naive filters and normalization routines.</em>
+</p>
+
+<h2 id="sec-preventing-directory-traversal">Preventing Directory Traversal</h2>
+<ul>
+<li><strong>Validate and Sanitize User Input (Allowlist)</strong><br/>Use an <em>accept-known-good</em> strategy: only permit specific filenames/IDs and reject everything else.</li>
+<li><strong>Use Allow Lists for File Access</strong><br/>Map user-provided identifiers to pre-approved files or directories rather than using raw paths.</li>
+<li><strong>Avoid Using User Input Directly in File Paths</strong><br/>Construct paths programmatically from safe components; do not concatenate unchecked user data.</li>
+<li><strong>Path Normalization Functions</strong><br/>Use built-in path normalization APIs (e.g., <code>realpath</code>, <code>Path.resolve</code>) to resolve <code>.</code>/<code>..</code> sequences then verify the resolved path is inside an allowed directory.</li>
+<li><strong>Access Control &amp; Least Privilege</strong><br/>Ensure the application runs with minimal permissions and restrict which files the process can read/write.</li>
+<li><strong>Isolate Execution Environments</strong><br/>Run the application in a confined environment (chroot, containers, restricted mounts) to limit what an attacker can access.</li>
+<li><strong>Reject Encoded/Alternate Representations</strong><br/>Normalize and decode inputs before validation to catch encoded traversal attempts.</li>
+</ul>
+<h2>Directory Traversal Tools (for testing &amp; assessment)</h2>
+<ul>
+<li><strong>Burp Suite</strong>: web testing platform with scanning and manual testing features.</li>
+<li><strong>OWASP ZAP</strong>: open-source scanner for automated detection.</li>
+<li><strong>Nikto</strong>: web server scanner that checks for dangerous files and misconfigurations.</li>
+<li><strong>DotDotPwn</strong>: tool specifically designed to test directory traversal payloads.</li>
+<li><strong>Metasploit</strong>: penetration testing framework with modules for traversal exploits.</li>
+<li><strong>DirBuster / Dirsearch</strong>: brute-forcing tools to discover hidden directories and files.</li>
+</ul>
+<p>
+<em>Use these tools responsibly for authorized testing only.</em>
+</p>
+<h2 id="sec-summary-conclusion">Summary / Conclusion</h2>
+<p>
+<strong>CWE-35 Path Traversal</strong> enables attackers to break directory boundaries and access unintended filesystem resources.
+      </p>
+<p>
+        Mitigation centers on <strong>strict input allowlisting, path normalization + verification, least privilege, and environment isolation</strong>.
+      </p>
+<p>
+        Regular testing with vetted tools and secure coding practices reduce the risk and impact of traversal vulnerabilities.
+      </p>

@@ -1,0 +1,32 @@
+<h2 id="sec-key-pillars-of-email-security">Key Pillars of Email Security</h2>
+<ul>
+<li><strong>Confidentiality:</strong> Ensures that only authorized users can access the email content.</li>
+<li><strong>Integrity:</strong> Protects email messages from unauthorized modification or tampering.</li>
+<li><strong>Authentication:</strong> Verifies the true identity of the sender.</li>
+<li><strong>Non-repudiation:</strong> Prevents a sender from denying they sent an email.</li>
+</ul>
+<h2 id="sec-protecting-data-with-encryption">Protecting Data with Encryption</h2>
+<p>
+        Email encryption scrambles the content, ensuring only the intended recipient can read it, preventing unauthorized access to sensitive information (PII, financial data, etc.).
+      </p>
+<h3>Major Encryption Standards</h3>
+<ul>
+<li><strong>S/MIME (Secure/Multipurpose Internet Mail Extensions):</strong> A widely used standard, especially in enterprise environments, that uses digital certificates from trusted Certificate Authorities (CAs) for encryption and digital signatures.</li>
+<li><strong>OpenPGP (Pretty Good Privacy):</strong> An open-source standard for email security. It uses public-key cryptography and is often preferred by individuals and privacy-focused users due to its "Web of Trust" model.</li>
+</ul>
+<h2 id="sec-common-email-threats">Common Email Threats</h2>
+<ul>
+<li><strong>Phishing:</strong> Deceptive emails designed to trick users into providing sensitive information.</li>
+<li><strong>Spear Phishing:</strong> A targeted phishing attack using personalized information to deceive a specific individual.</li>
+<li><strong>Email Spoofing:</strong> Forging email headers to make the message appear as if it came from a trusted source.</li>
+<li><strong>Business Email Compromise (BEC):</strong> Compromising or impersonating email accounts to initiate fraud.</li>
+</ul>
+<h2 id="sec-analyzing-email-authenticity">Analyzing Email Authenticity</h2>
+<p>
+        To detect spoofing and phishing, analysts examine email headers for authentication results:
+      </p>
+<ul>
+<li><strong>SPF (Sender Policy Framework):</strong> Verifies the sender's IP address against the domain's authorized list.</li>
+<li><strong>DKIM (DomainKeys Identified Mail):</strong> Uses a cryptographic signature to verify the message's authenticity and ensure it hasn't been tampered with.</li>
+<li><strong>DMARC (Domain-based Message Authentication, Reporting, and Conformance):</strong> Provides policy for receiving servers on how to handle emails that fail SPF or DKIM checks.</li>
+</ul>
